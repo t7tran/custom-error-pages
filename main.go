@@ -19,7 +19,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"mime"
 	"net/http"
@@ -74,10 +73,6 @@ const (
 func init() {
 	prometheus.MustRegister(requestCount)
 	prometheus.MustRegister(requestDuration)
-	if os.Getenv("QUIET") != "" {
-		log.SetFlags(0)
-		log.SetOutput(ioutil.Discard)
-	}
 }
 
 func main() {
