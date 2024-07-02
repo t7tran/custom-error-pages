@@ -73,6 +73,9 @@ const (
 func init() {
 	prometheus.MustRegister(requestCount)
 	prometheus.MustRegister(requestDuration)
+	if os.Getenv("DEBUG") == "" {
+		log.SetOutput(io.Discard)
+	}
 }
 
 func main() {
