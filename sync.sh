@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-version=1.10.0
+version=1.10.1
 
 curl -L https://github.com/kubernetes/ingress-nginx/archive/refs/tags/controller-v${version}.zip -o /tmp/controller.zip
 mkdir /tmp/controller
