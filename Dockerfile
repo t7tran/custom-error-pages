@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # https://github.com/kubernetes/ingress-nginx/blob/main/GOLANG_VERSION
-ARG GOLANG_VERSION=1.23.4
+ARG GOLANG_VERSION=1.24.1
 
 FROM golang:${GOLANG_VERSION}-alpine3.21 as builder
 
