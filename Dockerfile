@@ -13,9 +13,9 @@
 # limitations under the License.
 
 # https://github.com/kubernetes/ingress-nginx/blob/main/GOLANG_VERSION
-ARG GOLANG_VERSION=1.24.1
+ARG GOLANG_VERSION=1.25.3
 
-FROM golang:${GOLANG_VERSION}-alpine3.21 as builder
+FROM golang:${GOLANG_VERSION}-alpine3.22 AS builder
 
 RUN apk update \
     && apk upgrade && apk add git
