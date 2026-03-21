@@ -97,7 +97,7 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 	})
 
-	http.ListenAndServe(fmt.Sprintf(":8080"), nil)
+	http.ListenAndServe(":8080", nil)
 }
 
 func errorHandler(path, defaultFormat string) func(http.ResponseWriter, *http.Request) {
@@ -152,7 +152,6 @@ func errorHandler(path, defaultFormat string) func(http.ResponseWriter, *http.Re
 			code = 404
 			log.Printf("unexpected error reading return code: %v. Using %v", err, code)
 		}
-		w.WriteHeader(code)
 
 		if !strings.HasPrefix(ext, ".") {
 			ext = "." + ext
@@ -175,14 +174,16 @@ func errorHandler(path, defaultFormat string) func(http.ResponseWriter, *http.Re
 			}
 			defer f.Close()
 			log.Printf("serving custom error response for code %v and format %v from file %v", code, format, file)
+			w.WriteHeader(code)
 			io.Copy(w, f)
 			return
 		}
 		defer f.Close()
 		log.Printf("serving custom error response for code %v and format %v from file %v", code, format, file)
+		w.WriteHeader(code)
 		io.Copy(w, f)
 
-		duration := time.Now().Sub(start).Seconds()
+		duration := time.Since(start).Seconds()
 
 		proto := strconv.Itoa(r.ProtoMajor)
 		proto = fmt.Sprintf("%s.%s", proto, strconv.Itoa(r.ProtoMinor))
